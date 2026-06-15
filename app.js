@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.getElementById('custom-lightbox');
     const lightboxImg = document.getElementById('lightbox-image');
-    const lightboxCaption = document.getElementById('lightbox-caption');
     const lightboxClose = document.getElementById('lightbox-close');
     const lightboxPrev = document.getElementById('lightbox-prev');
     const lightboxNext = document.getElementById('lightbox-next');
@@ -126,13 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Read details of all gallery items
     galleryItems.forEach((item, index) => {
         const imgSrc = item.getAttribute('data-src');
-        const imgTitle = item.querySelector('h4').textContent;
-        const imgTag = item.querySelector('.hover-tag').textContent;
         
-        galleryImages.push({
-            src: imgSrc,
-            caption: `${imgTag} — ${imgTitle}`
-        });
+        galleryImages.push(imgSrc);
         
         // Open lightbox on item click
         item.addEventListener('click', () => {
@@ -144,8 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openLightbox(index) {
         if (!galleryImages[index]) return;
         
-        lightboxImg.src = galleryImages[index].src;
-        lightboxCaption.textContent = galleryImages[index].caption;
+        lightboxImg.src = galleryImages[index];
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden'; // Lock scrolling
     }
